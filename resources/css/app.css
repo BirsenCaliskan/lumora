@@ -1,11 +1,162 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap');
+
 @import 'tailwindcss';
+
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
+@source "../views/app.blade.php";
+@source "../js/app.js";
+@source "../js/App.vue";
+@source "../js/store/";
+@source "../js/router/";
+@source "../js/components/";
+
 @theme {
+    /* Font Families */
+    --font-elms-sans: 'Elms Sans', sans-serif;
+    --font-montserrat: 'Montserrat', sans-serif;
+    --font-inter: 'Inter', sans-serif;
+    --font-dosis: 'Dosis', sans-serif;
+    /*
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    'Segoe UI Symbol', 'Noto Color Emoji';
+
+     */
+
+    /* Screens (Breakpoints) */
+    --screen-3xl: 1600px;
+    --screen-1xl: 1092px;
+    --screen-sm-max: 767px;
+    --screen-xs-max: 425px;
+    --screen-2xs-max: 376px;
+    --screen-3xs-max: 320px;
+
+    /* Max Width */
+    --max-width-screen-3xl: 1600px;
+
+    --breakpoint-3xs: 319px;
+    --breakpoint-2xs: 373px;
+    --breakpoint-xs: 425px;
+
+    /* Font Sizes */
+    --font-size-3xs: 10px;
+    --font-size-2xs: 11px;
+    --font-size-xs: 12px;
+    --font-size-s: 13px;
+    --font-size-sm: 14px;
+    --font-size-md: 15px;
+    --font-size-base: 16px;
+    --font-size-lg: 18px;
+    --font-size-xl: 20px;
+    --font-size-2xl: 24px;
+    --font-size-3xl: 30px;
+    --font-size-4xl: 36px;
+    --font-size-5xl: 48px;
+    --font-size-6xl: 60px;
+    --font-size-7xl: 72px;
+    --font-size-8xl: 96px;
+    --font-size-9xl: 128px;
+
+    /* Line Heights */
+    --line-height-3: 12px;
+    --line-height-4: 16px;
+    --line-height-5: 20px;
+    --line-height-6: 24px;
+    --line-height-7: 28px;
+    --line-height-8: 32px;
+    --line-height-9: 36px;
+    --line-height-10: 40px;
+    --line-height-normal: normal;
+
+    /* Spacing */
+    --spacing-px: 1px;
+    --spacing-0: 0;
+    --spacing-0-5: 2px;
+    --spacing-1: 4px;
+    --spacing-1-5: 6px;
+    --spacing-2: 8px;
+    --spacing-2-5: 10px;
+    --spacing-3: 12px;
+    --spacing-3-5: 14px;
+    --spacing-4: 16px;
+    --spacing-5: 20px;
+    --spacing-6: 24px;
+    --spacing-7: 28px;
+    --spacing-8: 32px;
+    --spacing-9: 36px;
+    --spacing-10: 40px;
+    --spacing-11: 44px;
+    --spacing-12: 48px;
+    --spacing-14: 56px;
+    --spacing-16: 64px;
+    --spacing-20: 80px;
+    --spacing-24: 96px;
+    --spacing-28: 112px;
+    --spacing-32: 128px;
+    --spacing-36: 144px;
+    --spacing-40: 160px;
+    --spacing-44: 176px;
+    --spacing-48: 192px;
+    --spacing-52: 208px;
+    --spacing-56: 224px;
+    --spacing-60: 240px;
+    --spacing-64: 256px;
+    --spacing-72: 288px;
+    --spacing-80: 320px;
+    --spacing-96: 384px;
+
+
+
+
+    /* Colors */
+    --color-gray-301: #F6F6F6;
+    --color-gray-304: #D9D9D9;
+    --color-gray-701: #666666;
+    --color-red-301: #E50916;
+    --color-gray-305: #8C8C8C;
+    --color-gray-307: #777777;
+    --color-gray-708: #3E3E3E;
+    --color-gray-709: #2D2D2D;
+    --color-gray-801: #1D1D1D;
+    --color-blue-801: #1F1C36;
+
+    --color-theme-100: #f56e23;
+    --color-theme-300: #C86032;
+    --color-theme-200: #03206c;
+
+}
+@layer utilities {
+
+    .scrollbar {
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: rgba( var(--color-theme-200),.30) transparent;
+    }
+
+    .scrollbar::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .scrollbar::-webkit-scrollbar-thumb {
+        background-color: rgba( var(--color-theme-200),.30);
+        border-radius: 4px;
+        border: 2px solid transparent;
+    }
+
+    .scrollbar::-webkit-scrollbar-thumb:hover {
+        background-color: var(--color-theme-200);
+    }
 }
