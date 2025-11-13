@@ -7,7 +7,7 @@ const router = createRouter({
     routes: [
         {path: '/', name: 'Home', component: () => import('@/components/front/homepage.vue')},
 
-        {path: '/egitimlerimiz', name: 'Educations', component: () => import('@/components/educations/main.vue')},
+        {path: '/tum-egitimler', name: 'Educations', component: () => import('@/components/educations/main.vue')},
         {path: '/egitim/:url', name: 'EducationDetail', component: () => import('@/components/educations/detail.vue')},
 
         {path: '/egitmenlerimiz', name: 'Teachers', component: () => import('@/components/teachers/main.vue')},
