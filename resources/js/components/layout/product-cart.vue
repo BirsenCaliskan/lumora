@@ -1,7 +1,10 @@
 <template>
     <router-link :to="`/${product.url}`" :title="product.name" class="bg-white block border border-gray-200 py-3.5 px-4 rounded-lg group hover:shadow-lg">
-        <figure class="overflow-hidden mb-3.5">
-            <img :src="`${$store.state.BASEURL2}${product.picture}`" :alt="product.name" class="max-w-full w-auto h-full rounded">
+        <figure class="relative overflow-hidden mb-3.5">
+            <img :src="`${$store.state.BASEURL2}${product.picture}`" :alt="product.name" class="max-w-full w-auto h-full rounded-lg">
+            <div v-if="product.rate > 0" class="absolute top-3 right-3 bg-theme-100 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow-md z-10">
+                %{{ Math.round(product.rate )}} İNDİRİM
+            </div>
         </figure>
         <div class="text-md leading-5 line-clamp-2 h-10 font-elms-sans font-medium mb-4">{{ product.name }}</div>
         <div class="flex item-end gap-1.5 mb-5">

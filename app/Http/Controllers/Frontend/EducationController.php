@@ -91,7 +91,7 @@ class EducationController extends Controller
             ->paginate(15);
 
         $educations->getCollection()->transform(function ($education) {
-            $education->rate = $education->discounted_price ? ($education->list_price / $education->discounted_price) * 100 : 0;
+            $education->rate = $education->discounted_price ? ($education->discounted_price / $education->list_price)* 100 : 0;
             if ($education->instructors && $education->instructors->count()) {
                 $education->instructor_names = $education->instructors->map(function ($instructorRelation) {
                     return optional($instructorRelation->instructor)->name;
@@ -115,7 +115,7 @@ class EducationController extends Controller
         if ($url == 'santiye-sefligi-egitimi') {
             $url = 'insaat-ve-santiye-yoneticiliği-egitimi';
         }
-        $education = Education::select('id', 'name', 'slug', 'slider_image', 'teaser', 'description', 'short_description', 'seo_title', 'seo_description')
+        $education = Education::select('id', 'name', 'slug', 'slider_image','list_price', 'discounted_price', 'teaser', 'description', 'short_description', 'seo_title', 'seo_description')
             ->with([
                 'instructors.instructor' => function ($q) {
                     $q->select('id', 'name', 'image')
@@ -140,6 +140,8 @@ class EducationController extends Controller
             ->where('status', '1')
             ->first();
         $education->picture = strstr($education->slider_image, '/') ? $education->slider_image : 'slider_images/' . $education->slider_image;
+
+        $education->rate = $education->discounted_price ? ($education->discounted_price / $education->list_price) * 100 : 0;
 
         if ($education->instructors && $education->instructors->count()) {
             $education->instructor_names = $education->instructors->map(function ($instructorRelation) {

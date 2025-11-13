@@ -53,7 +53,7 @@ class ApiController extends Controller
                 ->where('status','1')
                 ->get()->map(function ($query){
                     $query->url = $query->slug;
-                    $query->rate = $query->discounted_price ? ($query->list_price / $query->discounted_price) * 100 : 0;
+                    $query->rate = $query->discounted_price ? ($query->discounted_price / $query->list_price) * 100 : 0;
                     $query->picture = strstr($query->top_list_image, '/') ? $query->top_list_image : 'top_list_images/'.$query->top_list_image;
                     unset($query->top_list_image,$query->slug);
                     return $query;
@@ -86,7 +86,7 @@ class ApiController extends Controller
                 $query->name = $query->education->name;
                 $query->list_price = $query->education->list_price;
                 $query->discounted_price = $query->education->discounted_price;
-                $query->rate = $query->discounted_price ? ($query->list_price / $query->discounted_price) * 100 : 0;
+                $query->rate = $query->discounted_price ? ($query->discounted_price / $query->list_price) * 100 : 0;
                 $query->education_name = $query->education->name;
                 $query->url = $query->education->slug;
                 $query->id = $query->education->id;
@@ -107,7 +107,7 @@ class ApiController extends Controller
             ->inRandomOrder()
             ->limit($limit)
             ->get()->map(function ($query) use (&$sort_order){
-                $query->rate = $query->discounted_price ? ($query->list_price / $query->discounted_price) * 100 : 0;
+                $query->rate = $query->discounted_price ? ($query->discounted_price / $query->list_price) * 100 : 0;
                 $query->sort_order = $sort_order++;
                 $query->url = $query->slug;
                 $query->picture = strstr($query->top_list_image, '/') ? $query->top_list_image : 'top_list_images/'.$query->top_list_image;
@@ -122,7 +122,7 @@ class ApiController extends Controller
             ->limit($limit)
             ->inRandomOrder()
             ->get()->map(function ($query){
-                $query->rate = $query->discounted_price ? ($query->list_price / $query->discounted_price) * 100 : 0;
+                $query->rate = $query->discounted_price ? ($query->discounted_price / $query->list_price) * 100 : 0;
                 $query->url = $query->slug;
                 $query->picture = strstr($query->top_list_image, '/') ? $query->top_list_image : 'top_list_images/'.$query->top_list_image;
                 unset($query->site_menu,$query->top_list_image);

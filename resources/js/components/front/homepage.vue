@@ -256,7 +256,7 @@ import {Vue3Marquee} from 'vue3-marquee';
 import {Swiper, SwiperSlide} from "swiper/vue";
 import {Autoplay, Navigation,Pagination} from "swiper/modules";
 import {defineAsyncComponent} from "vue";
-import {openModal, pushModal} from "jenesius-vue-modal";
+import {pushModal} from "jenesius-vue-modal";
 import {useHead} from "@unhead/vue";
 
 export default {
@@ -265,7 +265,6 @@ export default {
         Vue3Marquee,
         Swiper,
         SwiperSlide,
-        CallForm: defineAsyncComponent(() => import('../layout/call_form.vue')),
         ProductCart: defineAsyncComponent(() => import('../layout/product-cart.vue'))
     },
     setup() {
