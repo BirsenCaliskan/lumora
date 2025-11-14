@@ -22,11 +22,24 @@
             </div>
             <!-- menu -->
             <div class="grow min-w-0 lg:flex hidden items-center justify-center gap-5 text-base leading-[1.2]">
-                <div class="group/menu">
+                <div class="relative group/menu">
                     <router-link :to="{name: 'Educations'}" title="Eğitimler" class="flex items-center gap-3 lg:py-7 px-5 hover:text-theme-100 relative group duration-200">
                         <span>Eğitimler</span>
                         <span class="absolute left-0 bottom-6 bg-theme-100 block w-0 h-0.5 group-hover:w-full duration-200"></span>
+                        <svg viewBox="0 0 30 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-auto group-hover/menu:rotate-180 duration-200">
+                            <path d="M1.66675 1.66666L15.0001 15L28.3334 1.66666" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                     </router-link>
+                    <div class="absolute inset-x-0 top-16 invisible w-60 max-h-60 h-auto scrollbar bg-white shadow text-sm leading-5 overflow-x-hidden overflow-y-auto rounded-2xl py-1 opacity-0 group-hover/menu:opacity-100 group-hover/menu:visible duration-300">
+                        <ul v-if="$store.state.categories && Object.keys($store.state.categories).length" class="text-sm leading-5">
+                            <li v-for="data in $store.state.categories">
+                                <router-link :to="`/${data.url}`" :title="data.name" class="flex items-center gap-2.5 w-full px-2 py-1.5 hover:text-theme-100 group duration-200 cursor-pointer">
+                                    <img :src="`${$store.state.BASEURL}assets/images/favicon.webp`" width="20" height="20" :alt="data.name" class="flex-none size-5 opacity-0 group-hover:opacity-100 duration-200">
+                                    <div class="grow min-w-0">{{ data.name }}</div>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="relative group/menu">
                     <button type="button" aria-label="Biz Kimiz?" class="flex items-center gap-3 lg:py-7 px-5 hover:text-theme-100 duration-200 cursor-pointer">
@@ -35,7 +48,7 @@
                             <path d="M1.66675 1.66666L15.0001 15L28.3334 1.66666" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </button>
-                    <div class="absolute inset-x-0 top-13 invisible w-60 max-h-60 h-auto scrollbar bg-white shadow text-sm leading-5 overflow-x-hidden overflow-y-auto rounded-2xl py-1 opacity-0 group-hover/menu:opacity-100 group-hover/menu:visible duration-300">
+                    <div class="absolute inset-x-0 top-16 invisible w-60 max-h-60 h-auto scrollbar bg-white shadow text-sm leading-5 overflow-x-hidden overflow-y-auto rounded-2xl py-1 opacity-0 group-hover/menu:opacity-100 group-hover/menu:visible duration-300">
                         <ul class="text-sm leading-5">
                             <li v-for="data in $store.state.staticPages">
                                 <router-link :to="{name: data.url}" :title="data.name" class="flex items-center gap-2.5 w-full px-2 py-1.5 hover:text-theme-100 group duration-200 cursor-pointer">

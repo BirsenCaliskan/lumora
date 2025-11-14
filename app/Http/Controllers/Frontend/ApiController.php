@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\DB;
 class ApiController extends Controller
 {
     public function categoryList(){
-         $categories = SiteMenu::select('id','name','slug','parent_id')
+         $categories = SiteMenu::select('id','name','slug as url','parent_id')
              ->where('parent_id','')
              ->orWhere('parent_id',null)
             ->orderBy('order','ASC')

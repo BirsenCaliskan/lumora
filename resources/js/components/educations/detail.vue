@@ -1,6 +1,6 @@
 <template>
     <template v-if="education && Object.keys(education).length">
-        <div class="max-w-screen-xl xl:mx-auto mx-5 max-md:mx-0 flex items-start gap-8 py-7">
+        <div class="max-w-screen-xl xl:mx-auto mx-5 flex max-lg:flex-col items-start gap-8 xl:py-7">
             <div class="grow min-w-0 mb-14 max-md:mb-7">
                 <!-- video -->
                 <div class="relative mb-10 max-md:-mx-5">
@@ -21,11 +21,11 @@
                             <path d="M130.568 55.1475C134.17 57.0631 137.183 59.9227 139.284 63.4199C141.385 66.9171 142.495 70.9201 142.495 75C142.495 79.0799 141.385 83.0829 139.284 86.5801C137.183 90.0773 134.17 92.9369 130.568 94.8525L34.4775 147.105C19.005 155.527 0 144.577 0 127.26V22.7475C0 5.42249 19.005 -5.52001 34.4775 2.88749L130.568 55.1475Z"/>
                         </svg>
                     </button>
-                    <div class="absolute inset-0 flex flex-col justify-end gap-3">
-                        <h1 class="text-6xl max-lg:text-3xl leading-[1.2] font-elms-sans font-bold text-center">
+                    <div class="absolute inset-0 flex flex-col justify-end gap-3 max-md:gap-1">
+                        <!--<h1 class="text-6xl max-lg:text-3xl leading-[1.2] font-elms-sans font-bold text-center">
                             {{ education.name }}
-                        </h1>
-                        <div v-if="education.instructor_names && Object.keys(education.instructor_names).length" class="py-3 text-center space-y-2">
+                        </h1> -->
+                        <div v-if="education.instructor_names && Object.keys(education.instructor_names).length" class="text-center space-y-2">
                             <div class="text-xl max-lg:text-base leading-[1.2] font-bold text-theme-100">
                                 Eğitmenler
                             </div>
@@ -38,24 +38,12 @@
                         </div>
                     </div>
                 </div>
-                <!-- icons -->
-                <div v-if="education.details && Object.keys(education.details).length" class="space-y-3 mb-14 max-md:mb-7">
-                    <div class="text-3xl max-lg:text-2xl font-semibold font-elms-sans">
-                        Kurs İçeriği
-                    </div>
-                    <div class="grid grid-cols-2 max-md:grid-cols-1 gap-4 text-base leading-5 max-lg:text-sm">
-                        <div v-for="data in education.details" class="flex items-center space-y-3 text-center">
-                            <i :class="data.icon" class="text-3xl text-center"></i>
-                            <div>{{ data.name }}</div>
-                        </div>
-                    </div>
-                </div>
                 <!-- description -->
                 <div v-if="education.detail_contents && Object.keys(education.detail_contents).length" class="grid grid-cols-2 max-lg:grid-cols-1 gap-6 mb-14 max-md:mb-7">
                     <div v-for="data in education.detail_contents" class="border border-gray-200 rounded-lg px-5 py-3.5 text-md" v-html="data.content"></div>
                 </div>
                 <!-- teacher -->
-                <div v-if="education.instructors && Object.keys(education.instructors).length" class="mb-14 max-md:mb-7">
+                <div v-if="education.instructors && Object.keys(education.instructors).length" class="mb-14 max-md:mb-7 space-y-4">
                     <div v-for="data in education.instructors" class="overflow-auto border border-gray-200 rounded-lg space-y-6 p-4 sm:p-6 lg:p-8">
                         <h2 class="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center">
                             {{ data.name }} <span class="text-red-400">Kimdir ?</span>
@@ -72,7 +60,7 @@
                 <!-- detail -->
                 <div v-if="education.detail_list && Object.keys(education.detail_list).length" class="space-y-3">
                     <div class="">
-                        <div class="max-w-sm mx-auto w-full py-6 rounded-lg text-xl leading-5 3xs:max-lg:text-base font-bold">
+                        <div class="text-center w-full py-6 rounded-lg text-xl leading-5 3xs:max-lg:text-base font-bold">
                             {{ education.name }} Hakkında
                         </div>
                         <div v-for="data in education.detail_list" :key="`accordion-${data.id}`" class="mb-3">
@@ -88,8 +76,31 @@
                     </div>
                 </div>
             </div>
-            <div class="flex-none w-64 max-lg:hidden h-fit sticky top-20 z-10 space-y-4">
-                <div class=""></div>
+            <div class="max-lg:order-first flex-none w-72 max-lg:w-full h-fit lg:sticky top-20 z-10 space-y-4">
+                <div class="px-5 py-4 shadow-2xl space-y-8">
+                    <!-- icons -->
+                    <div class="space-y-6">
+                        <figure class="-mx-5 -mt-4">
+                            <img :src="`${BASEURL2}${education.picture}`" :alt="education.name" class="w-full h-auto">
+                        </figure>
+                        <h1 class="text-3xl max-lg:text-2xl font-semibold font-elms-sans">
+                            {{ education.name }}
+                        </h1>
+                        <div v-if="education.details && Object.keys(education.details).length" class="grid grid-cols-1 gap-2.5 text-sm leading-5 max-lg:text-s">
+                            <div v-for="data in education.details" class="flex items-center space-y-3 text-center">
+                                <i :class="data.icon" class="text-3xl text-center"></i>
+                                <div>{{ data.name }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex item-end gap-2 mb-5">
+                        <div class="text-base leading-5 line-through text-gray-305" v-price-format="{price: education.list_price, currency: 'TRY'}"></div>
+                        <div class="text-xl leading-5 font-semibold text-theme-200" v-price-format="{price: education.discounted_price ?? education.list_price , currency: 'TRY'}"></div>
+                    </div>
+                    <button type="button" aria-label="add-product" class="block w-full bg-theme-100 border border-theme-100 rounded text-white text-center text-md leading-4 font-medium px-5 py-2.5 cursor-pointer group-hover:bg-white group-hover:text-black duration-200">
+                        SEPETE EKLE
+                    </button>
+                </div>
             </div>
         </div>
         <!-- educations -->
@@ -131,9 +142,9 @@
 
         </div>
         <!-- fixed button -->
-        <div class="fixed bottom-0 inset-x-0 w-full md:hidden z-[99999999999]">
-            <button type="button" @click="callModal" aria-label="Hemen Başvur" class="block w-full rounded-lg bg-gradient-to-r from-red-301 to-black text-white text-sm leading-5 text-center font-semibold px-6 py-2.5 cursor-pointer">
-                Hemen Başvur
+        <div class="fixed bottom-0 inset-x-0 w-full lg:hidden z-[99999999999]">
+            <button type="button" aria-label="add-product" class="block w-full bg-theme-100 border border-theme-100 text-white text-center text-md leading-4 font-medium px-5 py-2.5 cursor-pointer group-hover:bg-white group-hover:text-black duration-200">
+                SEPETE EKLE
             </button>
         </div>
     </template>

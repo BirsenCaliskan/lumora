@@ -6,7 +6,7 @@
     </h1>
     <!-- detail -->
     <div v-if="blogs.data && Object.keys(blogs.data).length" class="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 2xs:grid-cols-2 3xs:grid-cols-1 gap-x-6 gap-y-9 3xs:max-lg:gap-x-3.5 3xs:max-lg:gap-y-5">
-      <router-link :to="{name: 'Page',params: {url: data.url}}" title="data.name" v-for="data in blogs.data" class="space-y-2.5 3xs:max-lg:space-y-1.5 text-center">
+      <router-link :to="`/${data.url}`" :title="data.name" v-for="data in blogs.data" class="space-y-2.5 3xs:max-lg:space-y-1.5 text-center">
         <figure class="w-full">
           <img :src="`${$store.state.BASEURL}${data.picture}`" width="300" height="416" :alt="data.name" loading="lazy" class="w-full h-auto border border-red-301 rounded-3xl">
         </figure>
